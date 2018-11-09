@@ -16,21 +16,22 @@ restService.use(
 );
 restService.use(bodyParser.json());
 
-
 restService.post("/echo", function (req, res) {
-  Request.get(`http://api.aladhan.com/v1/calendar?latitude=24.8667795&longitude=67.0311286&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
-    if (err) throw err;
-    else {
-      var data = JSON.parse(body)
-      var timing = data.data[0].timings
-      speech = `<speak>Fajr time is ${timing.Fajr}, <break time="2s"/> Dhuhr time is ${timing.Dhuhr}, <break time="2s"/> Asr time is ${timing.Asr}, <break time="2s"/> Maghrib time is ${timing.Maghrib} and <break time="2s"/> Isha time is${timing.Isha}</speak>`;
-      return res.json({
-        speech: speech,
-        displayText: speech,
-        source: "webhook-echo-sample"
-      });
-    }
-  });
+  if (req.body.result.parameters.PrayerTime === "Time") {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=24.8667795&longitude=67.0311286&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing = data.data[0].timings
+        str = `<speak>Fajr time is ${timing.Fajr}, Dhuhr time is ${timing.Dhuhr}, Asr time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Isha time is${timing.Isha}</speak>`;
+        return res.json({
+          speech: str,
+          displayText: str,
+          source: "webhook-echo-sample"
+        });
+      }
+    });
+  }
 });
 
 // https://www.w3.org/TR/2005/NOTE-ssml-sayas-20050526/#S3.3

@@ -30,6 +30,7 @@ restService.post("/echo", function (req, res) {
       else {
         var data = JSON.parse(body)
         var timing = data.data[0].timings
+        timing.toString()
         return res.json({
           speech: timing,
           displayText: timing,

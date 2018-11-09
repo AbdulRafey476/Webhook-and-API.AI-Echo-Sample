@@ -17,7 +17,7 @@ restService.use(
 restService.use(bodyParser.json());
 
 restService.post("/times", function (req, res) {
-  if (req.body.result.parameters.GetPrayerTimes) {
+  if (req.body.result.parameters.PrayerTime === "Time") {
     Request.get(`http://api.aladhan.com/v1/calendar?latitude=24.8667795&longitude=67.0311286&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
       let data = JSON.parse(body)

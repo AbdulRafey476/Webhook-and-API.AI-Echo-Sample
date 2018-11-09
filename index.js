@@ -23,7 +23,7 @@ restService.post("/echo", function (req, res) {
       else {
         var data = JSON.parse(body)
         var timing = data.data[0].timings
-        var str = `<speak>Fajr time is ${timing.Fajr}, <break time="2s"/> Dhuhr time is ${timing.Dhuhr}, <break time="2s"/> Asr time is ${timing.Asr}, <break time="2s"/> Maghrib time is ${timing.Maghrib} <break time="3s"/> and Isha time is${timing.Isha}</speak>`;
+        var str = `<speak>Fajar time is ${timing.Fajr}, <break time="2s"/> Dhuhr time is ${timing.Dhuhr}, <break time="2s"/> Asar time is ${timing.Asr}, <break time="2s"/> Maghrib time is ${timing.Maghrib} <break time="3s"/> and Esha time is${timing.Isha}</speak>`;
         return res.json({
           speech: str,
           displayText: str,

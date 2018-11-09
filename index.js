@@ -17,12 +17,6 @@ restService.use(
 restService.use(bodyParser.json());
 
 
-
-// restService.post("/times", function (req, res) {
-//   if (req.body.result.parameters.PrayerTime.toLowerCase() === "time") {
-//   }
-// });
-
 restService.post("/echo", function (req, res) {
   if (req.body.result.parameters.PrayerTime === "Time") {
     Request.get(`http://api.aladhan.com/v1/calendar?latitude=24.8667795&longitude=67.0311286&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
@@ -30,10 +24,10 @@ restService.post("/echo", function (req, res) {
       else {
         var data = JSON.parse(body)
         var timing = data.data[0].timings
-        timing.toString()
+        var str = String(timing)
         return res.json({
-          speech: timing,
-          displayText: timing,
+          speech: str,
+          displayText: str,
           source: "webhook-echo-sample"
         });
       }

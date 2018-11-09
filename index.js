@@ -25,8 +25,8 @@ restService.post("/echo", function (req, res) {
       var timing = data.data[0].timings
       speech = `<speak>Fajr time is ${timing.Fajr}, <break time="2s"/> Dhuhr time is ${timing.Dhuhr}, <break time="2s"/> Asr time is ${timing.Asr}, <break time="2s"/> Maghrib time is ${timing.Maghrib} and <break time="2s"/> Isha time is${timing.Isha}</speak>`;
       return res.json({
-        speech: str,
-        displayText: str,
+        speech: speech,
+        displayText: speech,
         source: "webhook-echo-sample"
       });
     }

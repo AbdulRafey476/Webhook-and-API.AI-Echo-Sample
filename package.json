@@ -1,12 +1,12 @@
 {
-  "name": "webhook-echo-sample",
+  "name": "prayer-app",
   "version": "1.0.0",
-  "description": "Webhook echo sample",
+  "description": "Play azan or get times of azan or set time of azan",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Sunil Syal",
+  "author": "Abdul Rafey",
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",

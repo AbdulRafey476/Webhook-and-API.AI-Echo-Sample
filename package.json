@@ -10,9 +10,6 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
-    "geolocation": "^0.2.0",
-    "node-geocoder": "^3.22.0",
-    "request": "^2.88.0",
-    "web-midi-api": "^2.0.1"
+    "request": "^2.88.0"
   }
 }

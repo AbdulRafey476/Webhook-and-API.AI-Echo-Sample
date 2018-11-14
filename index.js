@@ -59,6 +59,25 @@ restService.post("/echo", function (req, res) {
       });
     });
   }
+  else if (req.body.result.parameters.PrayerNames === "Dhuhr") {
+    publicIp.v4().then(function (ip) {
+      let geo = geoip.lookup(ip);
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+        if (err) throw err;
+        else {
+          var data = JSON.parse(body)
+          var timing = data.data[0].timings
+          var str = `<speak>Dhuhr time is ${timing.Dhuhr}</speak>`;
+          var disStr = `Dhuhr time is ${timing.Dhuhr}`;
+          return res.json({
+            speech: str,
+            displayText: disStr,
+            source: "webhook-echo-sample"
+          });
+        }
+      });
+    });
+  }
 });
 
 restService.listen(PORT, function () {

@@ -24,7 +24,7 @@ restService.post("/echo", function (req, res) {
   if (req.body.result.parameters.PrayerTime === "Time") {
     publicIp.v4().then(function (ip) {
       let geo = geoip.lookup(ip);
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {
           var data = JSON.parse(body)
@@ -43,7 +43,7 @@ restService.post("/echo", function (req, res) {
   else if (req.body.result.parameters.PrayerNames === "Fajar") {
     publicIp.v4().then(function (ip) {
       let geo = geoip.lookup(ip);
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {
           var data = JSON.parse(body)
@@ -62,7 +62,7 @@ restService.post("/echo", function (req, res) {
   else if (req.body.result.parameters.PrayerNames === "Dhuhr") {
     publicIp.v4().then(function (ip) {
       let geo = geoip.lookup(ip);
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {
           var data = JSON.parse(body)
@@ -81,7 +81,7 @@ restService.post("/echo", function (req, res) {
   else if (req.body.result.parameters.PrayerNames === "Asaar") {
     publicIp.v4().then(function (ip) {
       let geo = geoip.lookup(ip);
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {
           var data = JSON.parse(body)
@@ -100,7 +100,7 @@ restService.post("/echo", function (req, res) {
   else if (req.body.result.parameters.PrayerNames === "Maghrib") {
     publicIp.v4().then(function (ip) {
       let geo = geoip.lookup(ip);
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {
           var data = JSON.parse(body)
@@ -119,7 +119,7 @@ restService.post("/echo", function (req, res) {
   else if (req.body.result.parameters.PrayerNames === "Esha") {
     publicIp.v4().then(function (ip) {
       let geo = geoip.lookup(ip);
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {
           var data = JSON.parse(body)

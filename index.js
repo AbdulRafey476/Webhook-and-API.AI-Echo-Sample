@@ -40,7 +40,7 @@ restService.post("/echo", function (req, res) {
       });
     });
   }
-  else if (req.body.result.parameters.PrayerNames === "Fajar") {
+  else if (req.body.result.parameters.PrayerNames === ["Fajar"]) {
     publicIp.v4().then(function (ip) {
       let geo = geoip.lookup(ip);
       Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getMonth()}&year=${now.getFullYear()}`, (err, response, body) => {

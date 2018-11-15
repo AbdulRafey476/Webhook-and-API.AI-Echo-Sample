@@ -4,10 +4,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Request = require("request");
 const geoip = require('geoip-lite');
-const ip = require('ip');
+// const ip = require('ip');
 const PORT = process.env.PORT || 8000;
 const publicIp = require('public-ip');
 const geolocation = require('geolocation')
+const where = require('node-where');
 
 const now = new Date()
 
@@ -18,7 +19,6 @@ restService.use(
     extended: true
   })
 );
-
 restService.use(bodyParser.json());
 
 restService.post("/echo", function (req, res) {
@@ -32,12 +32,30 @@ restService.post("/echo", function (req, res) {
         var disStr = `Fajar time is ${timing.Fajr}, Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
         return res.json({
           speech: str,
-          displayText: req.connection.remoteAddress,
+          displayText: disStr,
           source: "Nodejs"
         });
       }
     });
   }
+
+  // else if (req.body.result.parameters === "geo-city") {
+  //   Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+  //     if (err) throw err;
+  //     else {
+  //       var data = JSON.parse(body)
+  //       var timing = data.data[0].timings
+  //       var str = `<speak>Fajar time is ${timing.Fajr}</speak>`;
+  //       var disStr = `Fajar time is ${timing.Fajr}`;
+  //       return res.json({
+  //         speech: str,
+  //         displayText: disStr,
+  //         source: "Nodejs"
+  //       });
+  //     }
+  //   });
+  // }
+
 });
 
 

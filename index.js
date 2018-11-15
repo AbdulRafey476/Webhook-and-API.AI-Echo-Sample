@@ -34,10 +34,9 @@ restService.use(bodyParser.json());
 
 restService.post("/echo", function (req, res) {
   if (req.body.result.parameters.PrayerTime === "Time") {
-    let ip = req.connection.remoteAddress
-    let actip = ip.slice(7)
-    let geo = geoip.lookup(actip);
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    // let ip = req.connection.remoteAddress
+    // let geo = geoip.lookup(ip);
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)

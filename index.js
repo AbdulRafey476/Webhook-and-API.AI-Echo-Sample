@@ -44,6 +44,7 @@ restService.post("/echo", function (req, res) {
     }
 
     else {
+      var day = req.body.result.parameters.date
       Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth() + 1}&year=${now.getUTCFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {

@@ -34,7 +34,7 @@ restService.post("/echo", function (req, res) {
     });
   }
   else if (req.body.result.parameters.PrayerNames === "Fajar") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)
@@ -50,7 +50,7 @@ restService.post("/echo", function (req, res) {
     });
   }
   else if (req.body.result.parameters.PrayerNames === "Dhuhr") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)
@@ -66,7 +66,7 @@ restService.post("/echo", function (req, res) {
     });
   }
   else if (req.body.result.parameters.PrayerNames === "Asaar") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)
@@ -82,7 +82,7 @@ restService.post("/echo", function (req, res) {
     });
   }
   else if (req.body.result.parameters.PrayerNames === "Maghrib") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)
@@ -98,7 +98,7 @@ restService.post("/echo", function (req, res) {
     });
   }
   else if (req.body.result.parameters.PrayerNames === "Esha") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)

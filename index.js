@@ -54,8 +54,8 @@ restService.post("/echo", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>Fajar time is ${timing.Fajr}</speak>`;
-        var disStr = `Fajar time is ${timing.Fajr}`;
+        var str = `<speak>(${day}) Fajar time is ${timing.Fajr}</speak>`;
+        var disStr = `(${day}) Fajar time is ${timing.Fajr}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -78,8 +78,8 @@ restService.post("/echo", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>Dhuhr time is ${timing.Dhuhr}</speak>`;
-        var disStr = `Dhuhr time is ${timing.Dhuhr}`;
+        var str = `<speak>(${day}) Dhuhr time is ${timing.Dhuhr}</speak>`;
+        var disStr = `(${day}) Dhuhr time is ${timing.Dhuhr}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -102,8 +102,8 @@ restService.post("/echo", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>Asaar time is ${timing.Asr}</speak>`;
-        var disStr = `Asaar time is ${timing.Asr}`;
+        var str = `<speak>(${day}) Asaar time is ${timing.Asr}</speak>`;
+        var disStr = `(${day}) Asaar time is ${timing.Asr}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -126,8 +126,8 @@ restService.post("/echo", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>Maghrib time is ${timing.Maghrib}</speak>`;
-        var disStr = `Maghrib time is ${timing.Maghrib}`;
+        var str = `<speak>(${day}) Maghrib time is ${timing.Maghrib}</speak>`;
+        var disStr = `(${day}) Maghrib time is ${timing.Maghrib}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -150,8 +150,8 @@ restService.post("/echo", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>Isha time is ${timing.Isha}</speak>`;
-        var disStr = `Esha time is ${timing.Isha}`;
+        var str = `<speak>(${day}) Isha time is ${timing.Isha}</speak>`;
+        var disStr = `(${day}) Esha time is ${timing.Isha}`;
         return res.json({
           speech: str,
           displayText: disStr,

@@ -7,6 +7,7 @@ const geoip = require('geoip-lite');
 const ip = require('ip');
 const PORT = process.env.PORT || 8000;
 const publicIp = require('public-ip');
+const geolocation = require('geolocation')
 
 const now = new Date()
 
@@ -20,23 +21,9 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-// let ipadd = "10.63.228.215"
-// let geo = geoip.lookup(ipadd);
-// console.log(geo)
-
-// var ipsd = "::ffff:10.63.228.215"
-// console.log(ipsd.slice(7))
-
-
-// restService.get("/test", (req, res) => {
-//   res.send(req.connection.remoteAddress)
-// })
-
 restService.post("/echo", function (req, res) {
   if (req.body.result.parameters.PrayerTime === "Time") {
-    // let ip = req.connection.remoteAddress
-    // let geo = geoip.lookup(ip);
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.7128&longitude=74.0060&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)

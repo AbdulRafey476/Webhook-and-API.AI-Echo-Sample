@@ -41,7 +41,7 @@ restService.post("/echo", function (req, res) {
     });
   }
 
-  else if (req.body.result.parameters.PrayerNames === "Fajar" && req.body.result.parameters.date !== "") {
+  else if (req.body.result.parameters.FajarPray === "Fajar" && req.body.result.parameters.date !== "") {
     var day = req.body.result.parameters.date
     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
@@ -65,7 +65,7 @@ restService.post("/echo", function (req, res) {
     });
   }
 
-  else if (req.body.result.parameters.PrayerNames === "Dhuhr" && req.body.result.parameters.date !== "") {
+  else if (req.body.result.parameters.DhuhrPray === "Dhuhr" && req.body.result.parameters.date !== "") {
     var day = req.body.result.parameters.date
     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
@@ -89,7 +89,7 @@ restService.post("/echo", function (req, res) {
     });
   }
 
-  else if (req.body.result.parameters.PrayerNames === "Asaar" && req.body.result.parameters.date !== "") {
+  else if (req.body.result.parameters.AsaarPray === "Asaar" && req.body.result.parameters.date !== "") {
     var day = req.body.result.parameters.date
     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
@@ -113,7 +113,7 @@ restService.post("/echo", function (req, res) {
     });
   }
 
-  else if (req.body.result.parameters.PrayerNames === "Maghrib" && req.body.result.parameters.date !== "") {
+  else if (req.body.result.parameters.MaghribPray === "Maghrib" && req.body.result.parameters.date !== "") {
     var day = req.body.result.parameters.date
     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth() + 1}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;
@@ -137,7 +137,7 @@ restService.post("/echo", function (req, res) {
     });
   }
 
-  else if (req.body.result.parameters.PrayerNames === "Esha" && req.body.result.parameters.date !== "") {
+  else if (req.body.result.parameters.EshaPray === "Esha" && req.body.result.parameters.date !== "") {
     var day = req.body.result.parameters.date
     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth() + 1}&year=${now.getUTCFullYear()}`, (err, response, body) => {
       if (err) throw err;

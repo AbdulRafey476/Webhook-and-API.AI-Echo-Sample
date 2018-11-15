@@ -15,6 +15,7 @@
     "geolocation": "^0.2.0",
     "ip": "^1.1.5",
     "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
     "node-where": "^1.1.0",
     "public-ip": "^2.4.0",
     "request": "^2.88.0"

@@ -45,7 +45,7 @@ restService.post("/echo", function (req, res) {
 
     else {
       var day = req.body.result.parameters.date
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth() + 1}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+      Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
         if (err) throw err;
         else {
           var data = JSON.parse(body)
@@ -63,7 +63,7 @@ restService.post("/echo", function (req, res) {
   }
 
   else if (req.body.result.parameters.PrayerNames === "Fajar") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth() + 1}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)
@@ -80,7 +80,7 @@ restService.post("/echo", function (req, res) {
   }
 
   else if (req.body.result.parameters.PrayerNames === "Dhuhr") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth() + 1}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)
@@ -97,7 +97,7 @@ restService.post("/echo", function (req, res) {
   }
 
   else if (req.body.result.parameters.PrayerNames === "Asaar") {
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getUTCMonth() + 1}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)

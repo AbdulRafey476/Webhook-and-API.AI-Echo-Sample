@@ -32,7 +32,7 @@ restService.post("/echo", function (req, res) {
         var disStr = `Fajar time is ${timing.Fajr}, Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
         return res.json({
           speech: str,
-          displayText: disStr,
+          displayText: req.connection.remoteAddress,
           source: "Nodejs"
         });
       }

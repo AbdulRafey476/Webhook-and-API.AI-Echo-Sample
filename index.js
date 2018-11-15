@@ -20,126 +20,157 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.get("/test", (req, res) => {
-  res.send(req.connection.remoteAddress)
-})
+// let ipadd = "10.63.228.215"
+// let geo = geoip.lookup(ipadd);
+// console.log(geo)
+
+// var ipsd = "::ffff:10.63.228.215"
+// console.log(ipsd.slice(7))
+
+
+// restService.get("/test", (req, res) => {
+//   res.send(req.connection.remoteAddress)
+// })
 
 restService.post("/echo", function (req, res) {
   if (req.body.result.parameters.PrayerTime === "Time") {
-    publicIp.v4().then(function (ip) {
-      let geo = geoip.lookup(ip);
-      Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
-        if (err) throw err;
-        else {
-          var data = JSON.parse(body)
-          var timing = data.data[0].timings
-          var str = `<speak>Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
-          var disStr = `Fajar time is ${timing.Fajr}, Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
-          return res.json({
-            speech: str,
-            displayText: disStr,
-            source: "Nodejs"
-          });
-        }
-      });
+    let ip = req.connection.remoteAddress
+    let actip = ip.slice(7)
+    let geo = geoip.lookup(actip);
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing = data.data[0].timings
+        var str = `<speak>Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
+        var disStr = `Fajar time is ${timing.Fajr}, Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
+        return res.json({
+          speech: str,
+          displayText: disStr,
+          source: "Nodejs"
+        });
+      }
     });
   }
-  // else if (req.body.result.parameters.PrayerNames === "Fajar") {
-  //   publicIp.v4().then(function (ip) {
-  //     let geo = geoip.lookup(ip);
-  //     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
-  //       if (err) throw err;
-  //       else {
-  //         var data = JSON.parse(body)
-  //         var timing = data.data[0].timings
-  //         var str = `<speak>Fajar time is ${timing.Fajr}</speak>`;
-  //         var disStr = `Fajar time is ${timing.Fajr}`;
-  //         return res.json({
-  //           speech: str,
-  //           displayText: disStr,
-  //           source: "Nodejs"
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
-  // else if (req.body.result.parameters.PrayerNames === "Dhuhr") {
-  //   publicIp.v4().then(function (ip) {
-  //     let geo = geoip.lookup(ip);
-  //     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
-  //       if (err) throw err;
-  //       else {
-  //         var data = JSON.parse(body)
-  //         var timing = data.data[0].timings
-  //         var str = `<speak>Dhuhr time is ${timing.Dhuhr}</speak>`;
-  //         var disStr = `Dhuhr time is ${timing.Dhuhr}`;
-  //         return res.json({
-  //           speech: str,
-  //           displayText: disStr,
-  //           source: "Nodejs"
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
-  // else if (req.body.result.parameters.PrayerNames === "Asaar") {
-  //   publicIp.v4().then(function (ip) {
-  //     let geo = geoip.lookup(ip);
-  //     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
-  //       if (err) throw err;
-  //       else {
-  //         var data = JSON.parse(body)
-  //         var timing = data.data[0].timings
-  //         var str = `<speak>Asaar time is ${timing.Asr}</speak>`;
-  //         var disStr = `Asaar time is ${timing.Asr}`;
-  //         return res.json({
-  //           speech: str,
-  //           displayText: disStr,
-  //           source: "Nodejs"
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
-  // else if (req.body.result.parameters.PrayerNames === "Maghrib") {
-  //   publicIp.v4().then(function (ip) {
-  //     let geo = geoip.lookup(ip);
-  //     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
-  //       if (err) throw err;
-  //       else {
-  //         var data = JSON.parse(body)
-  //         var timing = data.data[0].timings
-  //         var str = `<speak>Maghrib time is ${timing.Maghrib}</speak>`;
-  //         var disStr = `Maghrib time is ${timing.Maghrib}`;
-  //         return res.json({
-  //           speech: str,
-  //           displayText: disStr,
-  //           source: "Nodejs"
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
-  // else if (req.body.result.parameters.PrayerNames === "Esha") {
-  //   publicIp.v4().then(function (ip) {
-  //     let geo = geoip.lookup(ip);
-  //     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
-  //       if (err) throw err;
-  //       else {
-  //         var data = JSON.parse(body)
-  //         var timing = data.data[0].timings
-  //         var str = `<speak>Isha time is ${timing.Isha}</speak>`;
-  //         var disStr = `Esha time is ${timing.Isha}`;
-  //         return res.json({
-  //           speech: str,
-  //           displayText: disStr,
-  //           source: "Nodejs"
-  //         });
-  //       }
-  //     });
-  //   });
-  // }
 });
+
+
+// restService.post("/echo", function (req, res) {
+//   if (req.body.result.parameters.PrayerTime === "Time") {
+//     publicIp.v4().then(function (ip) {
+//       let geo = geoip.lookup(ip);
+//       Request.get(`http://api.aladhan.com/v1/calendar?latitude=37.0902&longitude=95.7129&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+//         if (err) throw err;
+//         else {
+//           var data = JSON.parse(body)
+//           var timing = data.data[0].timings
+//           var str = `<speak>Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
+//           var disStr = `Fajar time is ${timing.Fajr}, Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
+//           return res.json({
+//             speech: str,
+//             displayText: disStr,
+//             source: "Nodejs"
+//           });
+//         }
+//       });
+//     });
+//   }
+// else if (req.body.result.parameters.PrayerNames === "Fajar") {
+//   publicIp.v4().then(function (ip) {
+//     let geo = geoip.lookup(ip);
+//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+//       if (err) throw err;
+//       else {
+//         var data = JSON.parse(body)
+//         var timing = data.data[0].timings
+//         var str = `<speak>Fajar time is ${timing.Fajr}</speak>`;
+//         var disStr = `Fajar time is ${timing.Fajr}`;
+//         return res.json({
+//           speech: str,
+//           displayText: disStr,
+//           source: "Nodejs"
+//         });
+//       }
+//     });
+//   });
+// }
+// else if (req.body.result.parameters.PrayerNames === "Dhuhr") {
+//   publicIp.v4().then(function (ip) {
+//     let geo = geoip.lookup(ip);
+//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+//       if (err) throw err;
+//       else {
+//         var data = JSON.parse(body)
+//         var timing = data.data[0].timings
+//         var str = `<speak>Dhuhr time is ${timing.Dhuhr}</speak>`;
+//         var disStr = `Dhuhr time is ${timing.Dhuhr}`;
+//         return res.json({
+//           speech: str,
+//           displayText: disStr,
+//           source: "Nodejs"
+//         });
+//       }
+//     });
+//   });
+// }
+// else if (req.body.result.parameters.PrayerNames === "Asaar") {
+//   publicIp.v4().then(function (ip) {
+//     let geo = geoip.lookup(ip);
+//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+//       if (err) throw err;
+//       else {
+//         var data = JSON.parse(body)
+//         var timing = data.data[0].timings
+//         var str = `<speak>Asaar time is ${timing.Asr}</speak>`;
+//         var disStr = `Asaar time is ${timing.Asr}`;
+//         return res.json({
+//           speech: str,
+//           displayText: disStr,
+//           source: "Nodejs"
+//         });
+//       }
+//     });
+//   });
+// }
+// else if (req.body.result.parameters.PrayerNames === "Maghrib") {
+//   publicIp.v4().then(function (ip) {
+//     let geo = geoip.lookup(ip);
+//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+//       if (err) throw err;
+//       else {
+//         var data = JSON.parse(body)
+//         var timing = data.data[0].timings
+//         var str = `<speak>Maghrib time is ${timing.Maghrib}</speak>`;
+//         var disStr = `Maghrib time is ${timing.Maghrib}`;
+//         return res.json({
+//           speech: str,
+//           displayText: disStr,
+//           source: "Nodejs"
+//         });
+//       }
+//     });
+//   });
+// }
+// else if (req.body.result.parameters.PrayerNames === "Esha") {
+//   publicIp.v4().then(function (ip) {
+//     let geo = geoip.lookup(ip);
+//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=${geo.ll[0]}&longitude=${geo.ll[1]}&method=2&month=${now.getUTCMonth()}&year=${now.getUTCFullYear()}`, (err, response, body) => {
+//       if (err) throw err;
+//       else {
+//         var data = JSON.parse(body)
+//         var timing = data.data[0].timings
+//         var str = `<speak>Isha time is ${timing.Isha}</speak>`;
+//         var disStr = `Esha time is ${timing.Isha}`;
+//         return res.json({
+//           speech: str,
+//           displayText: disStr,
+//           source: "Nodejs"
+//         });
+//       }
+//     });
+//   });
+// }
+// });
 
 restService.listen(PORT, function () {
   console.log("Server up and listening 8000");

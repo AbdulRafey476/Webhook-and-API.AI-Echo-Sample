@@ -21,7 +21,7 @@ restService.use(
 restService.use(bodyParser.json());
 
 restService.get("/test", (req, res) => {
-  res.send(req.socket.remoteAddress)
+  res.send(req.ip)
 })
 
 restService.post("/echo", function (req, res) {

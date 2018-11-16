@@ -22,7 +22,7 @@ restService.post("/echo", function (req, res) {
   const intent = app.getIntent();
 
   switch (intent) {
-    case 'input.welcome':
+    case 'Default Welcome Intent':
       // you are able to request for multiple permissions at once
       const permissions = [
         app.SupportedPermissions.NAME,
@@ -30,7 +30,7 @@ restService.post("/echo", function (req, res) {
       ];
       app.askForPermissions('Your own reason', permissions);
       break;
-    case 'DefaultWelcomeIntent.DefaultWelcomeIntent-fallback':
+    case 'Default Welcome Intent - fallback':
       if (app.isPermissionGranted()) {
         // permissions granted.
         let displayName = app.getUserName().displayName;

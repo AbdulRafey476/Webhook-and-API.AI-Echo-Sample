@@ -1,7 +1,7 @@
 {
   "name": "prayer-app",
   "version": "1.0.0",
-  "description": "Play azan or get times of azan or set time of azan",
+  "description": "Play azan or get times of azan",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

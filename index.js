@@ -158,6 +158,13 @@ restService.post("/echo", function (req, res) {
       }
     });
   }
+  else {
+    return res.json({
+      speech: "<speak>Kindly use right format of date (yyyy-mm-dd)</speak>",
+      displayText: "Kindly use right format of date (yyyy-mm-dd)",
+      source: "Nodejs"
+    });
+  }
 });
 
 restService.listen(PORT, function () {

@@ -21,8 +21,8 @@ restService.post("/", function (req, res) {
   if (req.body.result.action === "input.welcome") {
 
     return res.json({
-      speech: `Your own reason ${SupportedPermissions.DEVICE_PRECISE_LOCATION}`,
-      displayText: `Your own reason ${SupportedPermissions.DEVICE_PRECISE_LOCATION}`,
+      speech: `Your own reason ${DEVICE_PRECISE_LOCATION}`,
+      displayText: `Your own reason ${DEVICE_PRECISE_LOCATION}`,
       source: "Nodejs"
     });
   }

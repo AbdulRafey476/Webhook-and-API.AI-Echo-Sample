@@ -16,7 +16,7 @@ restService.use(bodyParser.json());
 
 restService.post("/", function (req, res) {
 
-  if (req.body.result.parameters === "greeting") {
+  if (req.body.result.parameters.greeting === "welcome") {
     return res.json({
       speech: "Welcome to Prayer Call App. So, What do you want me to do.",
       displayText: "Welcome to Prayer Call App. So, What do you want me to do.",

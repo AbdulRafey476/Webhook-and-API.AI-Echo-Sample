@@ -19,14 +19,12 @@ restService.use(bodyParser.json());
 restService.post("/", function (req, res) {
 
   if (req.body.result.action === "input.welcome") {
-    const app = new ApiAiApp({request: req, response: res});
-    const intent = app.getIntent();
 
-    const permissions = [
-      app.SupportedPermissions.NAME,
-      app.SupportedPermissions.DEVICE_PRECISE_LOCATION
-    ];
-    app.askForPermissions('Your own reason', permissions);
+    return res.json({
+      speech: `Your own reason ${SupportedPermissions.DEVICE_PRECISE_LOCATION}`,
+      displayText: `Your own reason ${SupportedPermissions.DEVICE_PRECISE_LOCATION}`,
+      source: "Nodejs"
+    });
   }
 
   else if (req.body.result.parameters.PrayerTime === "Time" && req.body.result.parameters.date !== "") {

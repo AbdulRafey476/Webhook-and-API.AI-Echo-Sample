@@ -41,7 +41,7 @@ restService.post("/", function (req, res) {
           }
         }
         var str = `<speak> (${day}) Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
-        var disStr = `(${day}) Fajar time is ${timing.Fajr},'<br>' Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
+        var disStr = `(${day}) Fajar time is ${timing.Fajr}, \n Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
         return res.json({
           speech: str,
           displayText: disStr,

@@ -6,6 +6,7 @@ const Request = require("request");
 const PORT = process.env.PORT || 8000;
 const ActionsSdkApp = require('actions-on-google').ActionsSdkApp;
 const ApiAiApp = require('actions-on-google').ApiAiApp;
+const now = new Date()
 
 const restService = express();
 
@@ -28,7 +29,7 @@ restService.post("/", function (req, res) {
 
   else if (req.body.result.parameters.PrayerTime === "Time" && req.body.result.parameters.date !== "") {
     var day = req.body.result.parameters.date
-    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${now.getMonth() + 1}&year=${now.getFullYear()}`, (err, response, body) => {
       if (err) throw err;
       else {
         var data = JSON.parse(body)

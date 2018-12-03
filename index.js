@@ -4,9 +4,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Request = require("request");
 const PORT = process.env.PORT || 8000;
-// const ActionsSdkApp = require('actions-on-google').ActionsSdkApp;
-// const ApiAiApp = require('actions-on-google').ApiAiApp;
-// const now = new Date()
 
 const restService = express();
 
@@ -40,8 +37,8 @@ restService.post("/", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `(${day})\n\n Fajar time is ${timing.Fajr}, Dhuhr time is ${timing.Dhuhr}, Asaar time is ${timing.Asr}, Maghrib time is ${timing.Maghrib} and Esha time is ${timing.Isha}`;
-        var disStr = `(${day})\n Fajar time is ${timing.Fajr},\n Dhuhr time is ${timing.Dhuhr},\n Asaar time is ${timing.Asr},\n Maghrib time is ${timing.Maghrib},\n  Esha time is ${timing.Isha}`;
+        var str = `<speak> (${day}) Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
+        var disStr = `(${day})\nFajar time is ${timing.Fajr},\nDhuhr time is ${timing.Dhuhr},\nAsaar time is ${timing.Asr},\nMaghrib time is ${timing.Maghrib},\nEsha time is ${timing.Isha}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -65,7 +62,7 @@ restService.post("/", function (req, res) {
           }
         }
         var str = `<speak>(${day}) Fajar time is ${timing.Fajr}</speak>`;
-        var disStr = `(${day}) Fajar time is ${timing.Fajr}`;
+        var disStr = `(${day})\nFajar time is ${timing.Fajr}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -88,8 +85,8 @@ restService.post("/", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>(${day})\n Dhuhr time is ${timing.Dhuhr}</speak>`;
-        var disStr = `(${day}) Dhuhr time is ${timing.Dhuhr}`;
+        var str = `<speak>(${day}) Dhuhr time is ${timing.Dhuhr}</speak>`;
+        var disStr = `(${day})\nDhuhr time is ${timing.Dhuhr}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -112,8 +109,8 @@ restService.post("/", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>(${day})\n Asaar time is ${timing.Asr}</speak>`;
-        var disStr = `(${day}) Asaar time is ${timing.Asr}`;
+        var str = `<speak>(${day}) Asaar time is ${timing.Asr}</speak>`;
+        var disStr = `(${day})\nAsaar time is ${timing.Asr}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -136,8 +133,8 @@ restService.post("/", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>(${day})\n Maghrib time is ${timing.Maghrib}</speak>`;
-        var disStr = `(${day}) Maghrib time is ${timing.Maghrib}`;
+        var str = `<speak>(${day}) Maghrib time is ${timing.Maghrib}</speak>`;
+        var disStr = `(${day})\nMaghrib time is ${timing.Maghrib}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -160,8 +157,8 @@ restService.post("/", function (req, res) {
             timing = data.data[i].timings
           }
         }
-        var str = `<speak>(${day})\n Isha time is ${timing.Isha}</speak>`;
-        var disStr = `(${day}) Esha time is ${timing.Isha}`;
+        var str = `<speak>(${day}) Isha time is ${timing.Isha}</speak>`;
+        var disStr = `(${day})\nEsha time is ${timing.Isha}`;
         return res.json({
           speech: str,
           displayText: disStr,
@@ -182,3 +179,4 @@ restService.post("/", function (req, res) {
 restService.listen(PORT, function () {
   console.log("Server up and listening 8000");
 });
+

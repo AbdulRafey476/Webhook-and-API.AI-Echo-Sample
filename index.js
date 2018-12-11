@@ -23,7 +23,7 @@ restService.post("/", function (req, res) {
         displayText: "Welcome to Prayer Call App. So, What do you want me to do.",
         source: "Nodejs"
       });  
-    }, 3000);
+    }, 12000);
   }
 
   else if (req.body.result.parameters.PrayerTime === "Time" && req.body.result.parameters.date !== "") {

@@ -14,6 +14,48 @@ restService.use(
 );
 restService.use(bodyParser.json());
 
+setInterval(() => {
+  Request.post('https://echo-service-new476.herokuapp.com/', {
+    "id": "c8c5464e-89e2-4453-b77a-2f21b48f38d4",
+    "timestamp": "2018-12-11T09:51:01.51Z",
+    "lang": "en",
+    "result": {
+      "source": "agent",
+      "resolvedQuery": "get today azan time",
+      "speech": "",
+      "action": "",
+      "actionIncomplete": false,
+      "parameters": {
+        "PrayerTime": "Time",
+        "date": "2018-12-11"
+      },
+      "contexts": [],
+      "metadata": {
+        "intentId": "84ae876a-3b01-4f30-9f56-10d69bac3807",
+        "webhookUsed": "true",
+        "webhookForSlotFillingUsed": "false",
+        "isFallbackIntent": "false",
+        "intentName": "Get Azan Times"
+      },
+      "fulfillment": {
+        "speech": "I'm sorry, Server is not responding!",
+        "messages": [
+          {
+            "type": 0,
+            "speech": "I'm sorry, Server is  not responding!"
+          }
+        ]
+      },
+      "score": 1
+    },
+    "status": {
+      "code": 200,
+      "errorType": "success"
+    },
+    "sessionId": "f14d3727-e440-ed19-eba3-e388d0d730b0"
+  })
+}, 2000);
+
 restService.post("/", function (req, res) {
 
   if (req.body.result.action === "input.welcome") {
@@ -22,14 +64,6 @@ restService.post("/", function (req, res) {
       displayText: "Welcome to Prayer Call App. So, What do you want me to do.",
       source: "Nodejs"
     });
-
-    setTimeout(() => {
-      return res.json({
-        speech: "dsafds",
-        displayText: "dsfds",
-        source: "Nodejs"
-      });
-    }, 3000);
   }
 
   else if (req.body.result.parameters.PrayerTime === "Time" && req.body.result.parameters.date !== "") {

@@ -12,10 +12,7 @@ restService.use(
     extended: true
   })
 );
-
-restService.get("/test", function (req, res) {
-  res.send("Testing")
-})
+restService.use(bodyParser.json());
 
 restService.post("/", function (req, res) {
 

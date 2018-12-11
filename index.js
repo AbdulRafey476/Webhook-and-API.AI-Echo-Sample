@@ -14,177 +14,167 @@ restService.use(
 );
 restService.use(bodyParser.json());
 
-setInterval(() => {
-  restService.post("/", function (req, res) {
+restService.post("/", function (req, res) {
+
+  if (req.body.result.action === "input.welcome") {
     return res.json({
-      speech: "testing",
-      displayText: "testing",
+      speech: "<speak>Welcome to Prayer Call App. So, What do you want me to do.</speak>",
+      displayText: "Welcome to Prayer Call App. So, What do you want me to do.",
       source: "Nodejs"
     });
-  })
-}, 3000);
+  }
 
-// restService.post("/", function (req, res) {
+  else if (req.body.result.parameters.PrayerTime === "Time" && req.body.result.parameters.date !== "") {
+    var day = req.body.result.parameters.date
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing;
+        for (var i = 0; i < data.data.length; i++) {
+          var apiDate = data.data[i].date.readable
+          if (apiDate.slice(0, 2) === day.slice(8)) {
+            timing = data.data[i].timings
+          }
+        }
+        var str = `<speak> (${day}) Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
+        var disStr = `(${day})\nFajar time is ${timing.Fajr},\nDhuhr time is ${timing.Dhuhr},\nAsaar time is ${timing.Asr},\nMaghrib time is ${timing.Maghrib},\nEsha time is ${timing.Isha}`;
+        return res.json({
+          speech: str,
+          displayText: disStr,
+          source: "Nodejs"
+        });
+      }
+    });
+  }
 
-//   if (req.body.result.action === "input.welcome") {
-//     return res.json({
-//       speech: "<speak>Welcome to Prayer Call App. So, What do you want me to do.</speak>",
-//       displayText: "Welcome to Prayer Call App. So, What do you want me to do.",
-//       source: "Nodejs"
-//     });
-//   }
+  else if (req.body.result.parameters.FajarPray === "Fajar" && req.body.result.parameters.date !== "") {
+    var day = req.body.result.parameters.date
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing;
+        for (var i = 0; i < data.data.length; i++) {
+          var apiDate = data.data[i].date.readable
+          if (apiDate.slice(0, 2) === day.slice(8)) {
+            timing = data.data[i].timings
+          }
+        }
+        var str = `<speak>(${day}) Fajar time is ${timing.Fajr}</speak>`;
+        var disStr = `(${day})\nFajar time is ${timing.Fajr}`;
+        return res.json({
+          speech: str,
+          displayText: disStr,
+          source: "Nodejs"
+        });
+      }
+    });
+  }
 
-//   else if (req.body.result.parameters.PrayerTime === "Time" && req.body.result.parameters.date !== "") {
-//     var day = req.body.result.parameters.date
-//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
-//       if (err) throw err;
-//       else {
-//         var data = JSON.parse(body)
-//         var timing;
-//         for (var i = 0; i < data.data.length; i++) {
-//           var apiDate = data.data[i].date.readable
-//           if (apiDate.slice(0, 2) === day.slice(8)) {
-//             timing = data.data[i].timings
-//           }
-//         }
-//         var str = `<speak> (${day}) Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
-//         var disStr = `(${day})\nFajar time is ${timing.Fajr},\nDhuhr time is ${timing.Dhuhr},\nAsaar time is ${timing.Asr},\nMaghrib time is ${timing.Maghrib},\nEsha time is ${timing.Isha}`;
-//         return res.json({
-//           speech: str,
-//           displayText: disStr,
-//           source: "Nodejs"
-//         });
-//       }
-//     });
-//   }
+  else if (req.body.result.parameters.DhuhrPray === "Dhuhr" && req.body.result.parameters.date !== "") {
+    var day = req.body.result.parameters.date
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing;
+        for (var i = 0; i < data.data.length; i++) {
+          var apiDate = data.data[i].date.readable
+          if (apiDate.slice(0, 2) === day.slice(8)) {
+            timing = data.data[i].timings
+          }
+        }
+        var str = `<speak>(${day}) Dhuhr time is ${timing.Dhuhr}</speak>`;
+        var disStr = `(${day})\nDhuhr time is ${timing.Dhuhr}`;
+        return res.json({
+          speech: str,
+          displayText: disStr,
+          source: "Nodejs"
+        });
+      }
+    });
+  }
 
-//   else if (req.body.result.parameters.FajarPray === "Fajar" && req.body.result.parameters.date !== "") {
-//     var day = req.body.result.parameters.date
-//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
-//       if (err) throw err;
-//       else {
-//         var data = JSON.parse(body)
-//         var timing;
-//         for (var i = 0; i < data.data.length; i++) {
-//           var apiDate = data.data[i].date.readable
-//           if (apiDate.slice(0, 2) === day.slice(8)) {
-//             timing = data.data[i].timings
-//           }
-//         }
-//         var str = `<speak>(${day}) Fajar time is ${timing.Fajr}</speak>`;
-//         var disStr = `(${day})\nFajar time is ${timing.Fajr}`;
-//         return res.json({
-//           speech: str,
-//           displayText: disStr,
-//           source: "Nodejs"
-//         });
-//       }
-//     });
-//   }
+  else if (req.body.result.parameters.AsaarPray === "Asaar" && req.body.result.parameters.date !== "") {
+    var day = req.body.result.parameters.date
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing;
+        for (var i = 0; i < data.data.length; i++) {
+          var apiDate = data.data[i].date.readable
+          if (apiDate.slice(0, 2) === day.slice(8)) {
+            timing = data.data[i].timings
+          }
+        }
+        var str = `<speak>(${day}) Asaar time is ${timing.Asr}</speak>`;
+        var disStr = `(${day})\nAsaar time is ${timing.Asr}`;
+        return res.json({
+          speech: str,
+          displayText: disStr,
+          source: "Nodejs"
+        });
+      }
+    });
+  }
 
-//   else if (req.body.result.parameters.DhuhrPray === "Dhuhr" && req.body.result.parameters.date !== "") {
-//     var day = req.body.result.parameters.date
-//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
-//       if (err) throw err;
-//       else {
-//         var data = JSON.parse(body)
-//         var timing;
-//         for (var i = 0; i < data.data.length; i++) {
-//           var apiDate = data.data[i].date.readable
-//           if (apiDate.slice(0, 2) === day.slice(8)) {
-//             timing = data.data[i].timings
-//           }
-//         }
-//         var str = `<speak>(${day}) Dhuhr time is ${timing.Dhuhr}</speak>`;
-//         var disStr = `(${day})\nDhuhr time is ${timing.Dhuhr}`;
-//         return res.json({
-//           speech: str,
-//           displayText: disStr,
-//           source: "Nodejs"
-//         });
-//       }
-//     });
-//   }
+  else if (req.body.result.parameters.MaghribPray === "Maghrib" && req.body.result.parameters.date !== "") {
+    var day = req.body.result.parameters.date
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing;
+        for (var i = 0; i < data.data.length; i++) {
+          var apiDate = data.data[i].date.readable
+          if (apiDate.slice(0, 2) === day.slice(8)) {
+            timing = data.data[i].timings
+          }
+        }
+        var str = `<speak>(${day}) Maghrib time is ${timing.Maghrib}</speak>`;
+        var disStr = `(${day})\nMaghrib time is ${timing.Maghrib}`;
+        return res.json({
+          speech: str,
+          displayText: disStr,
+          source: "Nodejs"
+        });
+      }
+    });
+  }
 
-//   else if (req.body.result.parameters.AsaarPray === "Asaar" && req.body.result.parameters.date !== "") {
-//     var day = req.body.result.parameters.date
-//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
-//       if (err) throw err;
-//       else {
-//         var data = JSON.parse(body)
-//         var timing;
-//         for (var i = 0; i < data.data.length; i++) {
-//           var apiDate = data.data[i].date.readable
-//           if (apiDate.slice(0, 2) === day.slice(8)) {
-//             timing = data.data[i].timings
-//           }
-//         }
-//         var str = `<speak>(${day}) Asaar time is ${timing.Asr}</speak>`;
-//         var disStr = `(${day})\nAsaar time is ${timing.Asr}`;
-//         return res.json({
-//           speech: str,
-//           displayText: disStr,
-//           source: "Nodejs"
-//         });
-//       }
-//     });
-//   }
-
-//   else if (req.body.result.parameters.MaghribPray === "Maghrib" && req.body.result.parameters.date !== "") {
-//     var day = req.body.result.parameters.date
-//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
-//       if (err) throw err;
-//       else {
-//         var data = JSON.parse(body)
-//         var timing;
-//         for (var i = 0; i < data.data.length; i++) {
-//           var apiDate = data.data[i].date.readable
-//           if (apiDate.slice(0, 2) === day.slice(8)) {
-//             timing = data.data[i].timings
-//           }
-//         }
-//         var str = `<speak>(${day}) Maghrib time is ${timing.Maghrib}</speak>`;
-//         var disStr = `(${day})\nMaghrib time is ${timing.Maghrib}`;
-//         return res.json({
-//           speech: str,
-//           displayText: disStr,
-//           source: "Nodejs"
-//         });
-//       }
-//     });
-//   }
-
-//   else if (req.body.result.parameters.EshaPray === "Esha" && req.body.result.parameters.date !== "") {
-//     var day = req.body.result.parameters.date
-//     Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
-//       if (err) throw err;
-//       else {
-//         var data = JSON.parse(body)
-//         var timing;
-//         for (var i = 0; i < data.data.length; i++) {
-//           var apiDate = data.data[i].date.readable
-//           if (apiDate.slice(0, 2) === day.slice(8)) {
-//             timing = data.data[i].timings
-//           }
-//         }
-//         var str = `<speak>(${day}) Isha time is ${timing.Isha}</speak>`;
-//         var disStr = `(${day})\nEsha time is ${timing.Isha}`;
-//         return res.json({
-//           speech: str,
-//           displayText: disStr,
-//           source: "Nodejs"
-//         });
-//       }
-//     });
-//   }
-//   else {
-//     return res.json({
-//       speech: "<speak>Kindly use right format of date (yyyy-mm-dd)</speak>",
-//       displayText: "Kindly use right format of date (yyyy-mm-dd)",
-//       source: "Nodejs"
-//     });
-//   }
-// });
+  else if (req.body.result.parameters.EshaPray === "Esha" && req.body.result.parameters.date !== "") {
+    var day = req.body.result.parameters.date
+    Request.get(`http://api.aladhan.com/v1/calendar?latitude=40.730610&longitude=-73.935242&method=2&month=${day.slice(5, 7)}&year=${day.slice(0, 4)}`, (err, response, body) => {
+      if (err) throw err;
+      else {
+        var data = JSON.parse(body)
+        var timing;
+        for (var i = 0; i < data.data.length; i++) {
+          var apiDate = data.data[i].date.readable
+          if (apiDate.slice(0, 2) === day.slice(8)) {
+            timing = data.data[i].timings
+          }
+        }
+        var str = `<speak>(${day}) Isha time is ${timing.Isha}</speak>`;
+        var disStr = `(${day})\nEsha time is ${timing.Isha}`;
+        return res.json({
+          speech: str,
+          displayText: disStr,
+          source: "Nodejs"
+        });
+      }
+    });
+  }
+  else {
+    return res.json({
+      speech: "<speak>Kindly use right format of date (yyyy-mm-dd)</speak>",
+      displayText: "Kindly use right format of date (yyyy-mm-dd)",
+      source: "Nodejs"
+    });
+  }
+});
 
 restService.listen(PORT, function () {
   console.log("Server up and listening 8000");

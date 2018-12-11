@@ -17,13 +17,19 @@ restService.use(bodyParser.json());
 restService.post("/", function (req, res) {
 
   if (req.body.result.action === "input.welcome") {
+    res.json({
+      speech: "<speak>Welcome to Prayer Call App. So, What do you want me to do.</speak>",
+      displayText: "Welcome to Prayer Call App. So, What do you want me to do.",
+      source: "Nodejs"
+    });
+
     setTimeout(() => {
       return res.json({
-        speech: "<speak>Welcome to Prayer Call App. So, What do you want me to do.</speak>",
-        displayText: "Welcome to Prayer Call App. So, What do you want me to do.",
+        speech: "dsafds",
+        displayText: "dsfds",
         source: "Nodejs"
-      });  
-    }, 12000);
+      });
+    }, 3000);
   }
 
   else if (req.body.result.parameters.PrayerTime === "Time" && req.body.result.parameters.date !== "") {

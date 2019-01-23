@@ -48,7 +48,7 @@ restService.post("/", function (req, res) {
           .create({
             body: disStr,
             from: '+19254034589',
-            to: '+923069067442'
+            to: '+923142366873'
           })
           .then(message => console.log(message.sid))
           .done();

@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const Request = require("request");
 const PORT = process.env.PORT || 8000;
 
+const accountSid = 'ACc6ae2e8acce1e92033079aba7caa066b';
+const authToken = '249a0a0548f03bb0c8ffb25890de3083';
+const client = require('twilio')(accountSid, authToken);
+
 const restService = express();
 
 restService.use(
@@ -39,6 +43,16 @@ restService.post("/", function (req, res) {
         }
         var str = `<speak> (${day}) Fajar time is ${timing.Fajr}, <break time="1s"/> Dhuhr time is ${timing.Dhuhr}, <break time="1s"/> Asaar time is ${timing.Asr}, <break time="1s"/> Maghrib time is ${timing.Maghrib} <break time="1s"/> and Esha time is ${timing.Isha}</speak>`;
         var disStr = `(${day})\nFajar time is ${timing.Fajr},\nDhuhr time is ${timing.Dhuhr},\nAsaar time is ${timing.Asr},\nMaghrib time is ${timing.Maghrib},\nEsha time is ${timing.Isha}`;
+
+        client.messages
+          .create({
+            body: disStr,
+            from: '+19254034589',
+            to: '+923069067442'
+          })
+          .then(message => console.log(message.sid))
+          .done();
+
         return res.json({
           speech: str,
           displayText: disStr,
